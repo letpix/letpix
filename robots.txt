@@ -1,0 +1,2 @@
+User-agent: *
+Sitemap: https://shop.letpix.gt.tc/sitemap.xml
