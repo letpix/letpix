@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="eCDMg8AK23AfwX9gLUGx9ItQHxJmaJ5EoZJzy-KFHOk" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>LETPIX PANEL | مرجع پنل‌های تخصصی</title>
+    <style>
+        :root {
+            --neon-green: #00ff41;
+            --dark-bg: #050505;
+            --card-bg: #111;
+            --vip-purple: #bc13fe;
+            --gold: #ffd700;
+            --special-red: #ff0000;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: white;
+            font-family: 'Tahoma', sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        header {
+            padding: 40px 20px;
+            background: linear-gradient(to bottom, #004d1a33, transparent);
+            border-bottom: 2px solid var(--neon-green);
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            color: var(--neon-green);
+            text-shadow: 0 0 15px var(--neon-green);
+            margin: 0;
+            letter-spacing: 2px;
+        }
+
+        .search-container {
+            margin: 20px auto;
+            max-width: 400px;
+            padding: 0 10px;
+        }
+
+        #productSearch {
+            width: 100%;
+            padding: 12px;
+            border-radius: 25px;
+            border: 1px solid var(--neon-green);
+            background: #111;
+            color: white;
+            outline: none;
+            text-align: center;
+        }
+
+        .support-info { margin-top: 15px; color: #ccc; font-size: 0.9rem; }
+        .support-link {
+            color: var(--neon-green);
+            text-decoration: none;
+            font-weight: bold;
+            border: 1px solid var(--neon-green);
+            padding: 2px 8px;
+            border-radius: 5px;
+        }
+
+        .notice {
+            background: rgba(0, 255, 65, 0.1);
+            padding: 15px;
+            margin: 20px 10px;
+            border-radius: 10px;
+            border: 1px dashed var(--neon-green);
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        /* چیدمان دو به دو */
+        .products-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 10px;
+            justify-content: center;
+        }
+
+        .product-card {
+            background: var(--card-bg);
+            border: 1px solid #222;
+            border-radius: 12px;
+            padding: 15px 5px;
+            width: calc(50% - 15px); /* دو محصول در هر ردیف */
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        /* افکت RGB متحرک کد خودت */
+        .rgb-card { border: none; position: relative; background: rgba(17, 17, 17, 0.9); z-index: 1; }
+        .rgb-card::before {
+            content: '';
+            position: absolute;
+            top: -2px; left: -2px; right: -2px; bottom: -2px;
+            background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+            background-size: 400%;
+            z-index: -1;
+            filter: blur(5px);
+            animation: glowing-rgb 20s linear infinite;
+            border-radius: 14px;
+        }
+
+        @keyframes glowing-rgb {
+            0% { background-position: 0 0; }
+            50% { background-position: 400% 0; }
+            100% { background-position: 0 0; }
+        }
+
+        .product-card h3 { color: var(--neon-green); font-size: 1rem; margin: 5px 0; }
+        .duration { color: #888; font-size: 0.8rem; }
+        .price { font-size: 1.1rem; font-weight: bold; margin: 10px 0; }
+        .product-code { color: #555; font-size: 0.7rem; margin-bottom: 10px; }
+
+        .buy-btn {
+            background: var(--neon-green);
+            color: black;
+            padding: 8px;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .special-card { border: 1px solid var(--special-red) !important; }
+        .vip-card { border: 1px solid var(--vip-purple) !important; }
+        .vip-card h3 { color: var(--vip-purple) !important; }
+        .gold-card { border: 1px solid var(--gold) !important; }
+        .gold-card h3 { color: var(--gold) !important; }
+
+        footer { padding: 20px; color: #444; font-size: 0.7rem; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>LETPIX PANEL</h1>
+        <div class="support-info">
+            پشتیبانی در روبیکا: <a href="https://rubika.ir/APPMAKER013" class="support-link">@APPMAKER013</a>
+        </div>
+    </header>
+
+    <div class="search-container">
+        <input type="text" id="productSearch" placeholder="جستجوی نام محصول..." onkeyup="searchProduct()">
+    </div>
+
+    <div class="notice">
+        <strong>راهنمای فعال‌سازی:</strong><br>
+        لطفاً هنگام پرداخت در سایت دارمت، <b>کد محصول</b> و <b>آیدی روبیکا</b> خود را در قسمت توضیحات بنویسید.
+    </div>
+
+    <section class="products-grid" id="productGrid">
+        <div class="product-card rgb-card">
+            <h3 style="color: white; text-shadow: 0 0 10px #fff;">پنل internal mb سوپر قوی</h3>
+            <div class="duration">(اشتراک یک ماهه)</div>
+            <span class="price">۳۹۰,۰۰۰ تومان</span>
+            <span class="product-code">کد محصول: ۶</span>
+            <a href="https://daramet.com/mrsam_hemayat" class="buy-btn">سفارش آنلاین</a>
+        </div>
+
+        <div class="product-card special-card">
+            <h3>رجدیت اختصاصی</h3>
+            <div class="duration">(اشتراک یک ماهه)</div>
+            <span class="price">۳۵,۰۰۰ تومان</span>
+            <span class="product-code">کد محصول: ۱</span>
+            <a href="https://daramet.com/mrsam_hemayat" class="buy-btn">سفارش آنلاین</a>
+        </div>
+
+        <div class="product-card">
+            <h3>پنل هدشات اختصاصی</h3>
+            <div class="duration">(اشتراک یک ماهه)</div>
+            <span class="price">۷۰,۰۰۰ تومان</span>
+            <span class="product-code">کد محصول: ۲</span>
+            <a href="https://daramet.com/mrsam_hemayat" class="buy-btn">سفارش آنلاین</a>
+        </div>
+
+        <div class="product-card">
+            <h3>پنل هدشات v2 قوی</h3>
+            <div class="duration">(اشتراک یک ماهه)</div>
+            <span class="price">۱۲۰,۰۰۰ تومان</span>
+            <span class="product-code">کد محصول: ۳</span>
+            <a href="https://daramet.com/mrsam_hemayat" class="buy-btn">سفارش آنلاین</a>
+        </div>
+
+        <div class="product-card vip-card">
+            <h3>پنل هدشات xvip برزیلی</h3>
+            <div class="duration">(اشتراک یک ماهه)</div>
+            <span class="price">۱۹۰,۰۰۰ تومان</span>
+            <span class="product-code">کد محصول: ۴</span>
+            <a href="https://daramet.com/mrsam_hemayat" class="buy-btn">سفارش آنلاین</a>
+        </div>
+
+        <div class="product-card gold-card">
+            <h3>دوره ساخت پنل اندروید</h3>
+            <div class="duration">(آموزش تخصصی)</div>
+            <span class="price">۱,۰۰۰,۰۰۰ تومان</span>
+            <span class="product-code">کد محصول: ۵</span>
+            <a href="https://daramet.com/mrsam_hemayat" class="buy-btn">خرید دوره</a>
+        </div>
+    </section>
+
+    <script>
+        function searchProduct() {
+            let input = document.getElementById('productSearch').value.toLowerCase();
+            let cards = document.getElementsByClassName('product-card');
+            for (let i = 0; i < cards.length; i++) {
+                let title = cards[i].getElementsByTagName('h3')[0].innerText.toLowerCase();
+                cards[i].style.display = title.includes(input) ? "" : "none";
+            }
+        }
+    </script>
+
+    <footer>
+        &copy; 2026 LETPIX PANEL | مرجع گیمینگ حرفه‌ای
+    </footer>
+
+</body>
+</html>
