@@ -2,16 +2,16 @@
 <html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LETPIX SHOP | فروشگاه تخصصی</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>LETPIX SHOP | فروشگاه تخصصی پنل</title>
     <style>
         :root {
-            --bg-body: #0f111a;
-            --bg-card: #1a1d29;
-            --accent: #0088ff; /* آبی حرفه‌ای مشابه سایت‌های فروشگاهی */
+            --bg-body: #0b0e14;
+            --bg-card: #161a23;
+            --accent: #0088ff;
             --text-main: #e1e1e1;
             --text-dim: #a0a0a0;
-            --success: #28a745;
+            --danger: #ff4444;
         }
 
         body {
@@ -19,183 +19,277 @@
             color: var(--text-main);
             font-family: 'Tahoma', sans-serif;
             margin: 0; padding: 0;
-            user-select: none;
+            line-height: 1.6;
         }
 
-        /* هدر و سبد خرید */
+        /* هدر ثابت */
         header {
-            background: #161925;
+            background: #12151e;
             padding: 15px 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 2px solid #25293a;
-            position: sticky; top: 0; z-index: 100;
+            border-bottom: 2px solid #1f2330;
+            position: sticky; top: 0; z-index: 1000;
         }
 
-        .logo { font-size: 1.5rem; font-weight: bold; color: var(--accent); }
-        
+        .logo { font-size: 1.4rem; font-weight: bold; color: var(--accent); letter-spacing: 1px; }
+
         .cart-box {
             position: relative;
-            background: #25293a;
+            background: #1f2330;
             padding: 8px 15px;
             border-radius: 8px;
             cursor: pointer;
+            transition: 0.3s;
         }
-
+        .cart-box:hover { background: #2a2f42; }
         .cart-count {
             background: var(--accent);
             color: white;
-            padding: 2px 6px;
+            padding: 2px 7px;
             border-radius: 50%;
-            font-size: 0.8rem;
-            position: absolute; top: -5px; right: -5px;
+            font-size: 0.75rem;
+            position: absolute; top: -8px; right: -8px;
+            box-shadow: 0 0 10px rgba(0, 136, 255, 0.5);
         }
+
+        /* بخش جستجو */
+        .search-area { padding: 20px 5% 0 5%; text-align: center; }
+        #productSearch {
+            width: 100%; max-width: 400px;
+            padding: 12px 20px;
+            border-radius: 25px;
+            border: 1px solid #25293a;
+            background: #161a23;
+            color: white;
+            outline: none;
+            transition: 0.3s;
+        }
+        #productSearch:focus { border-color: var(--accent); }
 
         /* گرید محصولات */
         .container { padding: 20px 5%; }
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: 15px;
+            grid-template-columns: repeat(2, 1fr); /* دو به دو چیده شدن */
+            gap: 12px;
         }
 
         .product-card {
             background: var(--bg-card);
             border-radius: 12px;
             overflow: hidden;
-            border: 1px solid #25293a;
-            transition: transform 0.2s;
+            border: 1px solid #1f2330;
+            display: flex;
+            flex-direction: column;
             cursor: pointer;
         }
-
-        .product-card:hover { transform: translateY(-5px); border-color: var(--accent); }
 
         .product-img {
             width: 100%;
             aspect-ratio: 1/1;
-            background: #eee; /* سفید برای تست طبق خواسته تو */
+            background: #fff; /* تصویر سفید تستی */
             object-fit: cover;
+            border-bottom: 1px solid #1f2330;
         }
 
-        .product-info { padding: 10px; text-align: center; }
-        .product-info h3 { font-size: 0.9rem; margin: 10px 0; height: 40px; }
-        .price { color: var(--accent); font-weight: bold; display: block; margin-bottom: 10px; }
+        .product-info { padding: 12px; text-align: center; flex-grow: 1; }
+        .product-info h3 { font-size: 0.85rem; margin: 0 0 8px 0; height: 35px; overflow: hidden; }
+        .price { color: var(--accent); font-weight: bold; display: block; font-size: 0.95rem; margin-bottom: 5px; }
+        .p-code { font-size: 0.7rem; color: #555; display: block; margin-bottom: 10px; }
 
         .add-to-cart {
             background: var(--accent);
             color: white;
             border: none;
             width: 100%;
-            padding: 8px;
-            border-radius: 5px;
+            padding: 10px 5px;
+            border-radius: 6px;
             cursor: pointer;
             font-weight: bold;
+            font-size: 0.8rem;
         }
 
         /* صفحه توضیحات محصول */
         #product-detail-view {
-            display: none; /* در ابتدا مخفی */
-            padding: 20px;
+            display: none;
+            padding: 20px 5%;
             animation: fadeIn 0.3s;
         }
-
         .back-btn {
-            background: #25293a;
+            background: #1f2330;
             color: white;
-            padding: 5px 15px;
-            border-radius: 5px;
+            padding: 8px 20px;
+            border-radius: 8px;
             cursor: pointer;
             display: inline-block;
             margin-bottom: 20px;
         }
-
         .detail-content {
             background: var(--bg-card);
-            padding: 20px;
+            padding: 25px;
             border-radius: 15px;
-            line-height: 1.8;
             text-align: justify;
+            border: 1px solid #1f2330;
         }
 
+        /* مدال سبد خرید */
+        #cart-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 2000;
+            justify-content: center; align-items: center;
+        }
+        .cart-content {
+            background: #161a23;
+            width: 90%; max-width: 400px;
+            border-radius: 15px;
+            padding: 20px;
+            max-height: 80vh; overflow-y: auto;
+        }
+        .cart-item {
+            display: flex; justify-content: space-between;
+            padding: 10px 0; border-bottom: 1px solid #25293a;
+        }
+        .remove-item { color: var(--danger); cursor: pointer; font-size: 0.8rem; }
+
         @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
+        @media (min-width: 768px) { .products-grid { grid-template-columns: repeat(3, 1fr); } }
     </style>
 </head>
 <body>
 
 <header>
-    <div class="logo">LETPIX SHOP</div>
-    <div class="cart-box" onclick="alert('لیست خرید شما خالی است یا در حال توسعه می‌باشد')">
+    <div class="logo">LETPIX PANEL</div>
+    <div class="cart-box" onclick="toggleCart()">
         🛒 سبد خرید
         <span class="cart-count" id="cartCount">۰</span>
     </div>
 </header>
 
-<div class="container" id="main-view">
-    <div class="products-grid">
-        <div class="product-card" onclick="showDetail('soon')">
-            <div class="product-img"></div>
-            <div class="product-info">
-                <h3>رجدیت اختصاصی</h3>
-                <span class="price">۳۵,۰۰۰ تومان</span>
-                <button class="add-to-cart" onclick="addToCart(event)">افزودن به سبد</button>
-            </div>
-        </div>
+<div id="main-view">
+    <div class="search-area">
+        <input type="text" id="productSearch" placeholder="جستجوی محصول..." onkeyup="searchProduct()">
+    </div>
 
-        <div class="product-card" onclick="showDetail('p2')">
-            <img src="https://uploadkon.ir/uploads/c9f524_26InShot-20260224-160601902.jpg" class="product-img">
-            <div class="product-info">
-                <h3>پنل هدشات اختصاصی VIP</h3>
-                <span class="price">۷۰,۰۰۰ تومان</span>
-                <button class="add-to-cart" onclick="addToCart(event)">افزودن به سبد</button>
+    <div class="container">
+        <div class="products-grid" id="productGrid">
             </div>
-        </div>
-
-        <div class="product-card" onclick="showDetail('soon')"><div class="product-img"></div><div class="product-info"><h3>محصول تستی ۳</h3><span class="price">۱۲۰,۰۰۰ تومان</span><button class="add-to-cart" onclick="addToCart(event)">افزودن به سبد</button></div></div>
-        <div class="product-card" onclick="showDetail('soon')"><div class="product-img"></div><div class="product-info"><h3>محصول تستی ۴</h3><span class="price">۱۹۰,۰۰۰ تومان</span><button class="add-to-cart" onclick="addToCart(event)">افزودن به سبد</button></div></div>
     </div>
 </div>
 
-<div class="container" id="product-detail-view">
-    <div class="back-btn" onclick="goHome()">← بازگشت به فروشگاه</div>
-    <div id="detail-body" class="detail-content">
+<div id="product-detail-view">
+    <div class="container">
+        <div class="back-btn" onclick="goHome()">← بازگشت به لیست</div>
+        <div id="detail-body" class="detail-content"></div>
+    </div>
+</div>
+
+<div id="cart-modal" onclick="toggleCart()">
+    <div class="cart-content" onclick="event.stopPropagation()">
+        <h3>سبد خرید شما</h3>
+        <div id="cartItemsList"></div>
+        <hr border="0" style="border-top:1px solid #25293a; margin: 15px 0;">
+        <div style="text-align: left; margin-bottom: 15px;">
+            جمع کل: <span id="totalPrice" style="color:var(--accent)">۰</span> تومان
         </div>
+        <a href="https://daramet.com/mrsam_hemayat" style="display:block; background:var(--accent); color:white; text-align:center; padding:12px; border-radius:8px; text-decoration:none; font-weight:bold;">تکمیل سفارش در دارمت</a>
+        <button onclick="toggleCart()" style="width:100%; margin-top:10px; background:none; border:none; color:#555; cursor:pointer;">بستن منو</button>
+    </div>
 </div>
 
 <script>
-    let cartCounter = 0;
+    const products = [
+        { id: 1, name: "رجدیت اختصاصی", price: 35000, code: 1, img: "white", duration: "یک ماهه" },
+        { id: 2, name: "پنل هدشات اختصاصی VIP", price: 70000, code: 2, img: "https://uploadkon.ir/uploads/c9f524_26InShot-20260224-160601902.jpg", duration: "یک ماهه" },
+        { id: 3, name: "پنل هدشات v2 قوی", price: 120000, code: 3, img: "white", duration: "یک ماهه" },
+        { id: 4, name: "پنل هدشات xvip برزیلی", price: 190000, code: 4, img: "white", duration: "یک ماهه" },
+        { id: 5, name: "دوره ساخت پنل اندروید", price: 1000000, code: 5, img: "white", duration: "آموزش تخصصی" },
+        { id: 6, name: "پنل internal mb سوپر قوی", price: 390000, code: 6, img: "white", duration: "یک ماهه" }
+    ];
 
-    function addToCart(e) {
-        e.stopPropagation(); // جلوگیری از باز شدن صفحه توضیحات موقع کلیک روی دکمه
-        cartCounter++;
-        document.getElementById('cartCount').innerText = cartCounter;
-        alert('به سبد خرید اضافه شد!');
+    let cart = [];
+
+    function initProducts() {
+        const grid = document.getElementById('productGrid');
+        grid.innerHTML = products.map(p => `
+            <div class="product-card" onclick="showDetail(${p.id})">
+                ${p.img === 'white' ? '<div class="product-img"></div>' : `<img src="${p.img}" class="product-img">`}
+                <div class="product-info">
+                    <h3>${p.name}</h3>
+                    <span class="price">${p.price.toLocaleString()} تومان</span>
+                    <span class="p-code">کد محصول: ${p.code}</span>
+                    <button class="add-to-cart" onclick="addToCart(event, ${p.id})">افزودن به سبد</button>
+                </div>
+            </div>
+        `).join('');
     }
 
-    function showDetail(type) {
+    function addToCart(e, id) {
+        e.stopPropagation();
+        const product = products.find(p => p.id === id);
+        cart.push(product);
+        updateCartUI();
+        alert(`${product.name} به سبد خرید اضافه شد.`);
+    }
+
+    function updateCartUI() {
+        document.getElementById('cartCount').innerText = cart.length;
+        const list = document.getElementById('cartItemsList');
+        const total = cart.reduce((sum, item) => sum + item.price, 0);
+        
+        list.innerHTML = cart.length === 0 ? '<p style="color:#555">سبد خرید خالی است.</p>' : 
+            cart.map((item, index) => `
+                <div class="cart-item">
+                    <span>${item.name}</span>
+                    <div>
+                        <span>${item.price.toLocaleString()}</span>
+                        <span class="remove-item" onclick="removeFromCart(${index})"> (حذف)</span>
+                    </div>
+                </div>
+            `).join('');
+        
+        document.getElementById('totalPrice').innerText = total.toLocaleString();
+    }
+
+    function removeFromCart(index) {
+        cart.splice(index, 1);
+        updateCartUI();
+    }
+
+    function toggleCart() {
+        const modal = document.getElementById('cart-modal');
+        modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
+    }
+
+    function showDetail(id) {
         document.getElementById('main-view').style.display = 'none';
         document.getElementById('product-detail-view').style.display = 'block';
+        window.scrollTo(0,0);
         
-        let detailBody = document.getElementById('detail-body');
-
-        if(type === 'p2') {
+        const detailBody = document.getElementById('detail-body');
+        if(id === 2) {
             detailBody.innerHTML = `
-                <h2 style="color:var(--accent)">پنل هِدشات اختصاصی LETPIX – اشتراک یک‌ماهه</h2>
+                <h2 style="color:var(--accent); margin-top:0;">پنل هِدشات اختصاصی LETPIX – اشتراک یک‌ماهه (نسخه VIP)</h2>
                 <p>آیا از باخت‌های پیاپی خسته شدی؟ وقتش رسیده که مثل یک یوتیوبر حرفه‌ای پلی بدی! پنل هدشات LETPIX یک ابزار معمولی نیست؛ این یک سیستم مهندسی شده برای کسانی است که می‌خواهند بدون ترس از بن شدن، در هر مچ نفر اول باشند.</p>
-                <hr border="0" style="border-top:1px solid #333">
-                <h4>پنل هدشات (Headshot Panel) چیست؟</h4>
-                <p>این پنل مجموعه‌ای از کدهای ریجستری (Regedit) و اسکریپت‌های بهینه‌سازی شده است که حساسیت بازی شما را تنظیم کرده تا لرزش نشانه به صفر برسد.</p>
-                <h4>ایم‌بات (AimBot) چیست؟</h4>
-                <p>قابلیتی که تیرهای شما را مستقیماً به سمت سر دشمن هدایت می‌کند. نسخه ما از تکنولوژی Silent Aim استفاده می‌کند تا کاملاً طبیعی به نظر برسد.</p>
-                <ul>
+                <h4 style="color:var(--accent)">پنل هدشات (Headshot Panel) چیست؟</h4>
+                <p>این پنل مجموعه‌ای از کدهای ریجستری (Regedit) و اسکریپت‌های بهینه‌سازی شده است که حساسیت بازی شما را به شکلی تنظیم می‌کند که لرزش نشانه (Aim) به صفر برسد.</p>
+                <h4 style="color:var(--accent)">ایم‌بات (AimBot) چیست و چه کاربردی دارد؟</h4>
+                <p>ایم‌بات قابلیتی است که به شما اجازه می‌دهد تیرهایتان مستقیماً به سمت سر (Head) دشمن هدایت شود. در نسخه اختصاصی ما، از تکنولوژی Silent Aim استفاده شده تا آنتی‌چت بازی به شما شک نکند.</p>
+                <ul style="padding-right:20px; color:var(--text-dim)">
                     <li>آنتی‌بن ۱۰۰٪ تست شده</li>
                     <li>افزایش قدرت تیر (Damage Plus)</li>
-                    <li>سازگاری با تمامی مودها</li>
+                    <li>ایم‌لاک (Aim Lock) روی سر دشمن</li>
+                    <li>سازگاری با تمامی مودهای بازی</li>
                 </ul>
-                <button class="add-to-cart" style="width:200px; margin-top:20px">خرید نهایی این محصول</button>
+                <p style="background:#1f2330; padding:10px; border-radius:8px; border-right:4px solid var(--accent)"><b>نکته:</b> این اشتراک ۳۰ روز اعتبار دارد و تمامی آپدیت‌ها در این مدت رایگان است.</p>
+                <button class="add-to-cart" style="width:200px; margin-top:20px" onclick="addToCart(event, 2)">خرید این محصول</button>
             `;
         } else {
-            detailBody.innerHTML = "<h2>توضیحات به زودی...</h2><p>این بخش در حال آماده‌سازی است.</p>";
+            detailBody.innerHTML = `<h2>توضیحات به زودی...</h2><p>محصول "${products.find(p => p.id === id).name}" در حال حاظر در مرحله تست نهایی است و توضیحات آن به زودی درج خواهد شد.</p>`;
         }
     }
 
@@ -203,6 +297,17 @@
         document.getElementById('main-view').style.display = 'block';
         document.getElementById('product-detail-view').style.display = 'none';
     }
+
+    function searchProduct() {
+        let input = document.getElementById('productSearch').value.toLowerCase();
+        let cards = document.getElementsByClassName('product-card');
+        for (let i = 0; i < cards.length; i++) {
+            let title = cards[i].getElementsByTagName('h3')[0].innerText.toLowerCase();
+            cards[i].style.display = title.includes(input) ? "" : "none";
+        }
+    }
+
+    initProducts();
 </script>
 
 </body>
