@@ -2,227 +2,208 @@
 <html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="google-site-verification" content="eCDMg8AK23AfwX9gLUGx9ItQHxJmaJ5EoZJzy-KFHOk" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>LETPIX PANEL | مرجع پنل‌های تخصصی</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LETPIX SHOP | فروشگاه تخصصی</title>
     <style>
         :root {
-            --neon-green: #00ff41;
-            --dark-bg: #050505;
-            --card-bg: #111;
-            --vip-purple: #bc13fe;
-            --gold: #ffd700;
-            --special-red: #ff0000;
+            --bg-body: #0f111a;
+            --bg-card: #1a1d29;
+            --accent: #0088ff; /* آبی حرفه‌ای مشابه سایت‌های فروشگاهی */
+            --text-main: #e1e1e1;
+            --text-dim: #a0a0a0;
+            --success: #28a745;
         }
 
         body {
-            background-color: var(--dark-bg);
-            color: white;
+            background-color: var(--bg-body);
+            color: var(--text-main);
             font-family: 'Tahoma', sans-serif;
-            margin: 0;
-            padding: 0;
-            text-align: center;
+            margin: 0; padding: 0;
+            user-select: none;
         }
 
+        /* هدر و سبد خرید */
         header {
-            padding: 40px 20px;
-            background: linear-gradient(to bottom, #004d1a33, transparent);
-            border-bottom: 2px solid var(--neon-green);
-        }
-
-        h1 {
-            font-size: 2.8rem;
-            color: var(--neon-green);
-            text-shadow: 0 0 15px var(--neon-green);
-            margin: 0;
-            letter-spacing: 2px;
-        }
-
-        .search-container {
-            margin: 20px auto;
-            max-width: 400px;
-            padding: 0 10px;
-        }
-
-        #productSearch {
-            width: 100%;
-            padding: 12px;
-            border-radius: 25px;
-            border: 1px solid var(--neon-green);
-            background: #111;
-            color: white;
-            outline: none;
-            text-align: center;
-        }
-
-        .support-info { margin-top: 15px; color: #ccc; font-size: 0.9rem; }
-        .support-link {
-            color: var(--neon-green);
-            text-decoration: none;
-            font-weight: bold;
-            border: 1px solid var(--neon-green);
-            padding: 2px 8px;
-            border-radius: 5px;
-        }
-
-        .notice {
-            background: rgba(0, 255, 65, 0.1);
-            padding: 15px;
-            margin: 20px 10px;
-            border-radius: 10px;
-            border: 1px dashed var(--neon-green);
-            font-size: 13px;
-            line-height: 1.8;
-        }
-
-        /* چیدمان دو به دو */
-        .products-grid {
+            background: #161925;
+            padding: 15px 5%;
             display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            padding: 10px;
-            justify-content: center;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #25293a;
+            position: sticky; top: 0; z-index: 100;
+        }
+
+        .logo { font-size: 1.5rem; font-weight: bold; color: var(--accent); }
+        
+        .cart-box {
+            position: relative;
+            background: #25293a;
+            padding: 8px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .cart-count {
+            background: var(--accent);
+            color: white;
+            padding: 2px 6px;
+            border-radius: 50%;
+            font-size: 0.8rem;
+            position: absolute; top: -5px; right: -5px;
+        }
+
+        /* گرید محصولات */
+        .container { padding: 20px 5%; }
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 15px;
         }
 
         .product-card {
-            background: var(--card-bg);
-            border: 1px solid #222;
+            background: var(--bg-card);
             border-radius: 12px;
-            padding: 15px 5px;
-            width: calc(50% - 15px); /* دو محصول در هر ردیف */
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            position: relative;
+            overflow: hidden;
+            border: 1px solid #25293a;
+            transition: transform 0.2s;
+            cursor: pointer;
         }
 
-        /* افکت RGB متحرک کد خودت */
-        .rgb-card { border: none; position: relative; background: rgba(17, 17, 17, 0.9); z-index: 1; }
-        .rgb-card::before {
-            content: '';
-            position: absolute;
-            top: -2px; left: -2px; right: -2px; bottom: -2px;
-            background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
-            background-size: 400%;
-            z-index: -1;
-            filter: blur(5px);
-            animation: glowing-rgb 20s linear infinite;
-            border-radius: 14px;
+        .product-card:hover { transform: translateY(-5px); border-color: var(--accent); }
+
+        .product-img {
+            width: 100%;
+            aspect-ratio: 1/1;
+            background: #eee; /* سفید برای تست طبق خواسته تو */
+            object-fit: cover;
         }
 
-        @keyframes glowing-rgb {
-            0% { background-position: 0 0; }
-            50% { background-position: 400% 0; }
-            100% { background-position: 0 0; }
-        }
+        .product-info { padding: 10px; text-align: center; }
+        .product-info h3 { font-size: 0.9rem; margin: 10px 0; height: 40px; }
+        .price { color: var(--accent); font-weight: bold; display: block; margin-bottom: 10px; }
 
-        .product-card h3 { color: var(--neon-green); font-size: 1rem; margin: 5px 0; }
-        .duration { color: #888; font-size: 0.8rem; }
-        .price { font-size: 1.1rem; font-weight: bold; margin: 10px 0; }
-        .product-code { color: #555; font-size: 0.7rem; margin-bottom: 10px; }
-
-        .buy-btn {
-            background: var(--neon-green);
-            color: black;
+        .add-to-cart {
+            background: var(--accent);
+            color: white;
+            border: none;
+            width: 100%;
             padding: 8px;
-            text-decoration: none;
-            border-radius: 6px;
+            border-radius: 5px;
+            cursor: pointer;
             font-weight: bold;
-            font-size: 0.9rem;
         }
 
-        .special-card { border: 1px solid var(--special-red) !important; }
-        .vip-card { border: 1px solid var(--vip-purple) !important; }
-        .vip-card h3 { color: var(--vip-purple) !important; }
-        .gold-card { border: 1px solid var(--gold) !important; }
-        .gold-card h3 { color: var(--gold) !important; }
+        /* صفحه توضیحات محصول */
+        #product-detail-view {
+            display: none; /* در ابتدا مخفی */
+            padding: 20px;
+            animation: fadeIn 0.3s;
+        }
 
-        footer { padding: 20px; color: #444; font-size: 0.7rem; }
+        .back-btn {
+            background: #25293a;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .detail-content {
+            background: var(--bg-card);
+            padding: 20px;
+            border-radius: 15px;
+            line-height: 1.8;
+            text-align: justify;
+        }
+
+        @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>LETPIX PANEL</h1>
-        <div class="support-info">
-            پشتیبانی در روبیکا: <a href="https://rubika.ir/APPMAKER013" class="support-link">@APPMAKER013</a>
-        </div>
-    </header>
-
-    <div class="search-container">
-        <input type="text" id="productSearch" placeholder="جستجوی نام محصول..." onkeyup="searchProduct()">
+<header>
+    <div class="logo">LETPIX SHOP</div>
+    <div class="cart-box" onclick="alert('لیست خرید شما خالی است یا در حال توسعه می‌باشد')">
+        🛒 سبد خرید
+        <span class="cart-count" id="cartCount">۰</span>
     </div>
+</header>
 
-    <div class="notice">
-        <strong>راهنمای فعال‌سازی:</strong><br>
-        لطفاً هنگام پرداخت در سایت دارمت، <b>کد محصول</b> و <b>آیدی روبیکا</b> خود را در قسمت توضیحات بنویسید.
+<div class="container" id="main-view">
+    <div class="products-grid">
+        <div class="product-card" onclick="showDetail('soon')">
+            <div class="product-img"></div>
+            <div class="product-info">
+                <h3>رجدیت اختصاصی</h3>
+                <span class="price">۳۵,۰۰۰ تومان</span>
+                <button class="add-to-cart" onclick="addToCart(event)">افزودن به سبد</button>
+            </div>
+        </div>
+
+        <div class="product-card" onclick="showDetail('p2')">
+            <img src="https://uploadkon.ir/uploads/c9f524_26InShot-20260224-160601902.jpg" class="product-img">
+            <div class="product-info">
+                <h3>پنل هدشات اختصاصی VIP</h3>
+                <span class="price">۷۰,۰۰۰ تومان</span>
+                <button class="add-to-cart" onclick="addToCart(event)">افزودن به سبد</button>
+            </div>
+        </div>
+
+        <div class="product-card" onclick="showDetail('soon')"><div class="product-img"></div><div class="product-info"><h3>محصول تستی ۳</h3><span class="price">۱۲۰,۰۰۰ تومان</span><button class="add-to-cart" onclick="addToCart(event)">افزودن به سبد</button></div></div>
+        <div class="product-card" onclick="showDetail('soon')"><div class="product-img"></div><div class="product-info"><h3>محصول تستی ۴</h3><span class="price">۱۹۰,۰۰۰ تومان</span><button class="add-to-cart" onclick="addToCart(event)">افزودن به سبد</button></div></div>
     </div>
+</div>
 
-    <section class="products-grid" id="productGrid">
-        <div class="product-card rgb-card">
-            <h3 style="color: white; text-shadow: 0 0 10px #fff;">پنل internal mb سوپر قوی</h3>
-            <div class="duration">(اشتراک یک ماهه)</div>
-            <span class="price">۳۹۰,۰۰۰ تومان</span>
-            <span class="product-code">کد محصول: ۶</span>
-            <a href="https://daramet.com/mrsam_hemayat" class="buy-btn">سفارش آنلاین</a>
+<div class="container" id="product-detail-view">
+    <div class="back-btn" onclick="goHome()">← بازگشت به فروشگاه</div>
+    <div id="detail-body" class="detail-content">
         </div>
+</div>
 
-        <div class="product-card special-card">
-            <h3>رجدیت اختصاصی</h3>
-            <div class="duration">(اشتراک یک ماهه)</div>
-            <span class="price">۳۵,۰۰۰ تومان</span>
-            <span class="product-code">کد محصول: ۱</span>
-            <a href="https://daramet.com/mrsam_hemayat" class="buy-btn">سفارش آنلاین</a>
-        </div>
+<script>
+    let cartCounter = 0;
 
-        <div class="product-card">
-            <h3>پنل هدشات اختصاصی</h3>
-            <div class="duration">(اشتراک یک ماهه)</div>
-            <span class="price">۷۰,۰۰۰ تومان</span>
-            <span class="product-code">کد محصول: ۲</span>
-            <a href="https://daramet.com/mrsam_hemayat" class="buy-btn">سفارش آنلاین</a>
-        </div>
+    function addToCart(e) {
+        e.stopPropagation(); // جلوگیری از باز شدن صفحه توضیحات موقع کلیک روی دکمه
+        cartCounter++;
+        document.getElementById('cartCount').innerText = cartCounter;
+        alert('به سبد خرید اضافه شد!');
+    }
 
-        <div class="product-card">
-            <h3>پنل هدشات v2 قوی</h3>
-            <div class="duration">(اشتراک یک ماهه)</div>
-            <span class="price">۱۲۰,۰۰۰ تومان</span>
-            <span class="product-code">کد محصول: ۳</span>
-            <a href="https://daramet.com/mrsam_hemayat" class="buy-btn">سفارش آنلاین</a>
-        </div>
+    function showDetail(type) {
+        document.getElementById('main-view').style.display = 'none';
+        document.getElementById('product-detail-view').style.display = 'block';
+        
+        let detailBody = document.getElementById('detail-body');
 
-        <div class="product-card vip-card">
-            <h3>پنل هدشات xvip برزیلی</h3>
-            <div class="duration">(اشتراک یک ماهه)</div>
-            <span class="price">۱۹۰,۰۰۰ تومان</span>
-            <span class="product-code">کد محصول: ۴</span>
-            <a href="https://daramet.com/mrsam_hemayat" class="buy-btn">سفارش آنلاین</a>
-        </div>
-
-        <div class="product-card gold-card">
-            <h3>دوره ساخت پنل اندروید</h3>
-            <div class="duration">(آموزش تخصصی)</div>
-            <span class="price">۱,۰۰۰,۰۰۰ تومان</span>
-            <span class="product-code">کد محصول: ۵</span>
-            <a href="https://daramet.com/mrsam_hemayat" class="buy-btn">خرید دوره</a>
-        </div>
-    </section>
-
-    <script>
-        function searchProduct() {
-            let input = document.getElementById('productSearch').value.toLowerCase();
-            let cards = document.getElementsByClassName('product-card');
-            for (let i = 0; i < cards.length; i++) {
-                let title = cards[i].getElementsByTagName('h3')[0].innerText.toLowerCase();
-                cards[i].style.display = title.includes(input) ? "" : "none";
-            }
+        if(type === 'p2') {
+            detailBody.innerHTML = `
+                <h2 style="color:var(--accent)">پنل هِدشات اختصاصی LETPIX – اشتراک یک‌ماهه</h2>
+                <p>آیا از باخت‌های پیاپی خسته شدی؟ وقتش رسیده که مثل یک یوتیوبر حرفه‌ای پلی بدی! پنل هدشات LETPIX یک ابزار معمولی نیست؛ این یک سیستم مهندسی شده برای کسانی است که می‌خواهند بدون ترس از بن شدن، در هر مچ نفر اول باشند.</p>
+                <hr border="0" style="border-top:1px solid #333">
+                <h4>پنل هدشات (Headshot Panel) چیست؟</h4>
+                <p>این پنل مجموعه‌ای از کدهای ریجستری (Regedit) و اسکریپت‌های بهینه‌سازی شده است که حساسیت بازی شما را تنظیم کرده تا لرزش نشانه به صفر برسد.</p>
+                <h4>ایم‌بات (AimBot) چیست؟</h4>
+                <p>قابلیتی که تیرهای شما را مستقیماً به سمت سر دشمن هدایت می‌کند. نسخه ما از تکنولوژی Silent Aim استفاده می‌کند تا کاملاً طبیعی به نظر برسد.</p>
+                <ul>
+                    <li>آنتی‌بن ۱۰۰٪ تست شده</li>
+                    <li>افزایش قدرت تیر (Damage Plus)</li>
+                    <li>سازگاری با تمامی مودها</li>
+                </ul>
+                <button class="add-to-cart" style="width:200px; margin-top:20px">خرید نهایی این محصول</button>
+            `;
+        } else {
+            detailBody.innerHTML = "<h2>توضیحات به زودی...</h2><p>این بخش در حال آماده‌سازی است.</p>";
         }
-    </script>
+    }
 
-    <footer>
-        &copy; 2026 LETPIX PANEL | مرجع گیمینگ حرفه‌ای
-    </footer>
+    function goHome() {
+        document.getElementById('main-view').style.display = 'block';
+        document.getElementById('product-detail-view').style.display = 'none';
+    }
+</script>
 
 </body>
 </html>
