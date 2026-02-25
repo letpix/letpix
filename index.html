@@ -55,7 +55,6 @@
             box-shadow: 0 0 10px rgba(0, 136, 255, 0.5);
         }
 
-        /* بخش جستجو فیت شده با گرید */
         .search-area { padding: 20px 5% 10px 5%; width: 100%; display: flex; justify-content: center; }
         #productSearch {
             width: 100%;
@@ -68,7 +67,6 @@
             text-align: center;
         }
 
-        /* استایل خط جداکننده و عنوان */
         .section-divider {
             display: flex;
             align-items: center;
@@ -127,7 +125,6 @@
             font-size: 0.75rem;
         }
 
-        /* سبد خرید و مدال */
         #cart-modal {
             display: none; position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -196,7 +193,7 @@
 <script>
     const products = [
         { id: 1, cat: 'eco', name: "رجدیت اختصاصی", price: 35000, code: 1, img: "https://uploadkon.ir/uploads/157524_26InShot-20260125-184810849.jpg" },
-        { id: 2, cat: 'eco', name: "پنل هدشات اختصاصی VIP", price: 70000, code: 2, img: "https://uploadkon.ir/uploads/c9f524_26InShot-20260224-160601902.jpg" },
+        { id: 2, cat: 'eco', name: "پنل هدشات اختصاصی VIP", price: 70000, code: 2, img: "https://i.ibb.co/YrgXyhq/In-Shot-20260224-205823576.jpg" },
         
         { id: 3, cat: 'v2', name: "پنل هدشات v2 قوی (نسخه پایه)", price: 120000, code: 3, img: "https://uploadkon.ir/uploads/290825_26InShot-20260224-160601902.jpg" },
         { id: 7, cat: 'v2', name: "پنل هدشات v2 قوی (نسخه حرفه‌ای)", price: 450000, code: 3, img: "https://uploadkon.ir/uploads/b41e24_26InShot-20260224-215702073.jpg" },
@@ -284,7 +281,6 @@
         let cards = document.getElementsByClassName('product-card');
         let dividers = document.getElementsByClassName('section-divider');
         
-        // مخفی کردن موقت دسته‌بندی‌ها موقع سرچ برای نمایش بهتر نتایج
         for (let div of dividers) div.style.display = input === "" ? "flex" : "none";
 
         for (let card of cards) {
