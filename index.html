@@ -191,6 +191,7 @@
 </div>
 
 <script>
+    // مدیریت لیست محصولات
     const products = [
         { id: 1, cat: 'eco', name: "رجدیت اختصاصی", price: 35000, code: 1, img: "https://i.ibb.co/pB86rK1c/In-Shot-20260125-184810849.jpg" },
         { id: 2, cat: 'eco', name: "پنل هدشات اختصاصی VIP", price: 70000, code: 2, img: "https://i.ibb.co/YrgXyhq/In-Shot-20260224-205823576.jpg" },
@@ -199,13 +200,23 @@
         { id: 7, cat: 'v2', name: "پنل هدشات v2 قوی (پنج ماهه)", price: 450000, code: 3, img: "https://i.ibb.co/QF4wg2Sp/In-Shot-20260224-215702073.jpg" },
         { id: 8, cat: 'v2', name: "پنل هدشات v2 قوی (نامحدود)", price: 890000, code: 3, img: "https://i.ibb.co/Rp5hm2Ky/In-Shot-20260224-225433176.jpg" },
         
-        { id: 4, cat: 'xvip', name: "پنل هدشات xvip برزیلی", price: 190000, code: 4, img: "white" },
+        // محصولات بخش XVIP (کد 4)
+        { id: 4, cat: 'xvip', name: "پنل هدشات xvip برزیلی (۱ ماهه)", price: 190000, code: 4, img: "white" },
+        { id: 9, cat: 'xvip', name: "پنل هدشات xvip برزیلی (۳ ماهه)", price: 580000, code: 4, img: "white" },
+        { id: 10, cat: 'xvip', name: "پنل هدشات xvip برزیلی (۶ ماهه)", price: 1100000, code: 4, img: "white" },
+        { id: 11, cat: 'xvip', name: "پنل هدشات xvip برزیلی (یک ساله)", price: 1900000, code: 4, img: "white" },
+        { id: 12, cat: 'xvip', name: "پنل هدشات xvip برزیلی (نامحدود)", price: 2400000, code: 4, img: "white" },
+
+        // محصولات بخش Internal (کد 6)
         { id: 6, cat: 'internal', name: "پنل internal mb سوپر قوی", price: 390000, code: 6, img: "white" },
+        { id: 13, cat: 'internal', name: "پنل internal mb (نسخه الترا نامحدود)", price: 2900000, code: 6, img: "white" },
+
         { id: 5, cat: 'edu', name: "دوره ساخت پنل اندروید", price: 1000000, code: 5, img: "white" }
     ];
 
     let cart = JSON.parse(localStorage.getItem('letpix_cart')) || [];
 
+    // تابع رندر کردن گریدها بر اساس دسته‌بندی
     function renderGrid(cat, elementId) {
         const grid = document.getElementById(elementId);
         const filtered = products.filter(p => p.cat === cat);
@@ -237,7 +248,7 @@
         cart.push(p);
         localStorage.setItem('letpix_cart', JSON.stringify(cart));
         updateCartUI();
-        alert(p.name + " اضافه شد.");
+        alert(p.name + " به سبد خرید اضافه شد.");
     }
 
     function updateCartUI() {
@@ -249,7 +260,7 @@
                 <span>${p.name}</span>
                 <span>${p.price.toLocaleString()} <span class="remove-item" onclick="removeFromCart(${index})">(حذف)</span></span>
             </div>
-        `).join('') || "سبد خرید خالی است.";
+        `).join('') || "سبد خرید شما فعلاً خالی است.";
     }
 
     function removeFromCart(index) {
@@ -268,7 +279,12 @@
         document.getElementById('main-view').style.display = 'none';
         document.getElementById('product-detail-view').style.display = 'block';
         window.scrollTo(0,0);
-        document.getElementById('detail-body').innerHTML = `<h2>${p.name}</h2><p>توضیحات فنی برای کد محصول ${p.code} به زودی درج خواهد شد. این پنل از آخرین متدهای آنتی‌بن استفاده می‌کند.</p><button class="add-to-cart" style="width:150px" onclick="addToCart(event, ${p.id})">خرید سریع</button>`;
+        document.getElementById('detail-body').innerHTML = `
+            <h2>${p.name}</h2>
+            <p style="color:var(--accent)">کد محصول: ${p.code}</p>
+            <p>توضیحات فنی برای این محصول به زودی درج خواهد شد. این پنل از آخرین متدهای آنتی‌بن و کدهای ریجستری اختصاصی استفاده می‌کند.</p>
+            <button class="add-to-cart" style="width:150px; margin-top:20px;" onclick="addToCart(event, ${p.id})">خرید سریع</button>
+        `;
     }
 
     function goHome() {
